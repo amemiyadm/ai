@@ -43,6 +43,12 @@ class SentenceBertJapanese:
         return torch.stack(all_embeddings)
 
 
+model = SentenceBertJapanese('sonoisa/sentence-bert-base-ja-mean-tokens-v2')
+
+genai.configure(api_key='AIzaSyAkzQkK_NZsFXK-jZoF9j51zV7F7KWNdm0')
+google_model = genai.GenerativeModel("gemini-2.0-flash")
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -55,7 +61,6 @@ def search():
 
     user_input = request.form['user-input']
 
-    model = SentenceBertJapanese('sonoisa/sentence-bert-base-ja-mean-tokens-v2')
     embeddings2 = model.encode([user_input], batch_size=8)
 
     most_similar = -1
@@ -72,9 +77,6 @@ def search():
 
     # 関連性の高い文章を取得
     most_relevant = loaded_embeddings[most_idx]
-
-    genai.configure(api_key='AIzaSyAkzQkK_NZsFXK-jZoF9j51zV7F7KWNdm0')
-    google_model = genai.GenerativeModel("gemini-2.0-flash")
 
     prompt = f'''
     3つの条件を守り、以下の記事から「{user_input}」について記述してある部分を簡潔に説明してください。
