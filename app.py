@@ -63,7 +63,7 @@ def search():
 
     # コサイン類似度の計算
     for i, loaded_embedding in enumerate(loaded_embeddings):
-        cosine_scores = util.cos_sim(loaded_embeddings[i]['vector'], embeddings2)
+        cosine_scores = util.cos_sim(loaded_embedding['vector'], embeddings2)
         best_idx = torch.argmax(cosine_scores)
         best_score = cosine_scores[best_idx]
         if most_similar < best_score:
