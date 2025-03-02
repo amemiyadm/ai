@@ -13,7 +13,7 @@ model = SentenceTransformer('intfloat/multilingual-e5-large')
 def hello():
     print(request.form['user-input'])
     user_input = request.form['user-input']
-    embeddings = model.encode([user_input], batch_size=8)
+    embeddings = model.encode([user_input])
     return jsonify({'output': embeddings.tolist()})
 
 
