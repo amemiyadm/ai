@@ -1,4 +1,4 @@
-﻿torch==2.6.0
-Flask==3.0.0
+﻿Flask==3.0.0
 sentence-transformers==3.4.1
 flask_cors==5.0.1
+gunicorn==19.9.0
